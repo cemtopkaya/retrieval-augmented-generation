@@ -116,3 +116,19 @@ pip install langflow
 ```
 
 Kurulumu tamamladıktan sonra LangFlow'u başlatmak, terminalinize "langflow run" girmek kadar basittir.
+
+### Langflow 
+LangFlow'a başlamadan önce Python'un bilgisayarınızda kurulu olup olmadığını kontrol etmeniz önemlidir. Python sürümünüz 3.9'un üzerinde ancak 3.12'den eski olmalıdır.
+
+Python 3.11 ile "langflow" adında bir sanal ortam oluşturmak için aşağıdaki komutları bir komut satırı terminaline girmeniz yeterlidir.
+```shell
+ubuntu@mynode:~$ sudo add-apt-repository ppa:deadsnakes/ppa
+ubuntu@mynode:~$ sudo apt install python3.11
+ubuntu@mynode:~$ sudo apt install python3.11-venv
+ubuntu@mynode:~$ python3.11 -m venv langflow
+ubuntu@mynode:~$ source langflow/bin/activate
+(langflow) ubuntu@mynode:~$ pip install langflow
+```
+
+Kurulumu tamamladıktan sonra LangFlow'u başlatmak, terminalinize "langflow run" girmek kadar basittir.
+Ardından, size verdiği URL'yi alın (yukarıdaki örnekte [http://127.0.0.1:7860](http://127.0.0.1:7860)'tır), web tarayıcınıza yapıştırın ve işte! Buna benzer bir arayüz görmelisiniz. Bu sayfada tüm projeleriniz görüntülenir.
