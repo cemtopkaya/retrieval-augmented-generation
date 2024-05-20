@@ -130,5 +130,43 @@ ubuntu@mynode:~$ source langflow/bin/activate
 (langflow) ubuntu@mynode:~$ pip install langflow
 ```
 
-Kurulumu tamamladıktan sonra LangFlow'u başlatmak, terminalinize "langflow run" girmek kadar basittir.
+Kurulumu tamamladıktan sonra LangFlow'u başlatmak, terminalinize `langflow run` girmek kadar basittir.
 Ardından, size verdiği URL'yi alın (yukarıdaki örnekte [http://127.0.0.1:7860](http://127.0.0.1:7860)'tır), web tarayıcınıza yapıştırın ve işte! Buna benzer bir arayüz görmelisiniz. Bu sayfada tüm projeleriniz görüntülenir.
+
+![langflow run](images/langflow_run.png)
+
+```sh
+langflow run --help
+```
+
+![langflow run help](images/langflow_run_help.png)
+
+Dış makinelerden de erişebilmek için `any address` yani 0.0.0.0 dinlesin diye `langflow run --host 0.0.0.0` komutunu çalıştırıyoruz.
+
+Projemiz için PDF dosyasındaki soruları yanıtlayabilen bir sohbet robotu geliştiriyoruz. Daha önce bahsettiğimiz RAG boru hattını hatırlıyor musunuz? Bunu bir araya getirmek için belirli unsurlara ihtiyacımız olacak:
+
+1. **PDF Yükleyici:** Burada "PyPDFLoader"ı kullanacağız. PDF belgenizin dosya yolunu girmeniz gerekecektir. 
+1. **Metin Ayırıcı:** "RecursiveCharacterTextSplitter" bizim tercihimiz olacak ve varsayılan ayarlar düzgün çalışacaktır. 
+1. **Metin Gömme Modeli:** Ücretsiz, açık kaynaklı yerleştirmeyi kullanmak için "OllamaEmbeddings"i tercih edin. 
+1. **Vektör Veritabanı:** Gömmeleri depolamak ve vektör aramalarını kolaylaştırmak için "FAISS" ile gidiyoruz. 
+1. **Yanıt Oluşturmak için Yüksek Lisans:** "ChatOllama"yı seçin ve modeli "llama2" olarak belirtin. 
+1. **Konuşma Belleği:** Bu, sohbet robotumuzun sohbet geçmişini tutmasına olanak tanıyarak takip eden sorulara yardımcı olur. "ConversationBufferMemory"yi kullanacağız. 
+1. **Konuşma Alma Zinciri:** Bu, yanıtlar oluşturmak için LLM, bellek ve alınan metinler gibi çeşitli bileşenleri birbirine bağlar. "ConversationRetrievalChain" bizim seçimimiz.
+
+Tüm bu bileşenleri tuval üzerine sürükleyip bırakın ve PDF dosya yolu ve LLM model adı gibi gerekli alanları ayarlayın. Diğer ayarları varsayılan değerlerinde bırakmanızda bir sakınca yoktur.
+
+Daha sonra akışınızı oluşturmak için bu bileşenleri bağlayın.
+
+Her şey bağlandıktan sonra akışı derlemek için sağ alttaki "yıldırım" düğmesine basın. Her şey yolunda giderse düğmenin yeşile dönmesi gerekir, bu da başarıyı gösterir.
+
+Akışı başarıyla derledikten sonra, yaratımınızı test etmek için "sohbet robotu" simgesine tıklayın.
+
+#### Birkaç ipucu
+Akışınız tamamlandığında onu bir JSON dosyası olarak kaydedebilir veya ileride erişim veya düzenleme yapmak üzere "Koleksiyonum" altında bulabilirsiniz. Önceden oluşturulmuş örneklerle LangFlow'a dalmak harika bir ilham kaynağı olabilir ve başlamanıza yardımcı olabilir. Bunu şu şekilde yapabilirsiniz: - "LangFlow Mağazası" örnekleri barındırır, ancak erişim için bir API anahtarına ihtiyacınız olacaktır. - LangFlow GitHub sayfası, daha sonra "yükle" düğmesini kullanarak LangFlow kullanıcı arayüzünüze yükleyebileceğiniz örnekleri indirmenize olanak tanır. Yerel olarak kurulum size göre değilse RAG işlem hattınızı oluşturmak için OpenAI'yi de tercih edebilirsiniz. Kurulum için OpenAI API anahtarınızın yanınızda olduğundan emin olun.
+
+### Akışı Kolaylaştırılmış Bir Chatbot'a Dönüştürme
+
+Artık akış doğru şekilde ayarlandıysa, onu uygulamanıza entegre etmenin zamanı geldi. LangFlow, akışınızı oluşturduktan sonra gerekli kod pasajını sunarak işinizi kolaylaştırır. Kenar Çubuğunda bulunan "Kod" düğmesine basmanız yeterlidir.
+
+Kaynak:
+https://freedium.cfd/https://towardsdatascience.com/building-local-rag-chatbots-without-coding-using-langflow-and-ollama-60760e8ed086
