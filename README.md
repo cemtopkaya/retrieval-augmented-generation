@@ -27,7 +27,31 @@ LangFlow, LangChain için özel olarak tasarlanmış bir web aracıdır. Kullan�
 `Ollama` açık kaynaklı LLM'leri kurup çalıştırmanın en iyi ve aynı zamanda en kolay yoludur. Diğerlerinin yanı sıra `Llama 2` ve `Mistral` gibi en yetenekli LLM'leri destekler ve mevcut modellerin listesini [ollama.ai/library](https://ollama.com/library) adresinde bulabilirsiniz.
 
 ### Ollama'yı Kurmak 
-Öncelikle [Ollama indirme sayfasına](https://ollama.com/download) gidin, işletim sisteminize uygun sürümü seçin, indirip yükleyin. Ollama kuruluyken terminalinizi açın ve aşağıdaki komutları girin. 
+Öncelikle [Ollama indirme sayfasına](https://ollama.com/download) gidin, işletim sisteminize uygun sürümü seçin, indirip yükleyin. 
+
+Linux makinede:
+```sh
+curl -fsSL https://ollama.com/install.sh | sh
+```
+
+![Ollamayı Kurmak](images/install_ollama.png)
+
+Ollamanın komutları basitçe bize  bize anlatıyor:
+
+```sh
+  serve       Start ollama
+  create      Create a model from a Modelfile
+  show        Show information for a model
+  run         Run a model
+  pull        Pull a model from a registry
+  push        Push a model to a registry
+  list        List models
+  ps          List running models
+  cp          Copy a model
+  rm          Remove a model
+```
+
+Ollama kuruluyken terminalinizi açın ve aşağıdaki komutları girin. 
 
 ```sh
 ollama serve
@@ -45,6 +69,33 @@ Bu proje için, Büyük Dil Modelimiz (LLM) olarak `Llama2`'yi ve gömme modeli 
 > `Nomic-embed-text`, geniş bağlam penceresine sahip güçlü bir açık kaynaklı gömme modelidir.
 
 Bu, herhangi bir bulut hizmetine ihtiyaç duymadan uygulamanın tamamını yerel olarak çalıştırmamızı sağlar!
+
+> Ollama hizmetinin 11434 portunda çalıştığını `netstat -pltn` ile göreceksiniz:
+> 
+> ![Ollama port on 11434](images/ollama_port_11434.png)
+
+> llama2'yi indirdiğimizde 3.8GB büyüklüğünde bir modeli çekmiş olacağız:
+> 
+> ![llama2 indirmek](images/download_llama2.png)
+
+> nomic-embed-text gömme modelini indirdiğimizde 
+
+![nomic-embed-text indirmek](images/download_nomic-embed-text.png) 
+
+#### Mistral'ı Kurmak 
+
+Mistral'ı indirip ollamayı çalıştırarak doğrudan yazışma ekranını açacaktır
+
+```sh
+ollama run mistral
+```
+
+![mistralı kurmak](images/install_mistral.png)
+
+#### Yüklü Modelleri Listelemek (ollama ls)
+`ollama ls` komutuyla yüklü modelleri listeleyebiliriz:
+
+![yüklü modelleri listele](images/list_models.png)
 
 ### LangFlow'u Ayarlama 
 
